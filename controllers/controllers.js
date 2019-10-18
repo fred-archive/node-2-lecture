@@ -28,7 +28,15 @@ module.exports = {
 
         const userIndex = users.findIndex((user)=> user.id === +id)
 
-        users[userIndex] = {id, first_name, last_name, email, gender, ip_address}
+        users[userIndex] = {id: +id, first_name, last_name, email, gender, ip_address}
+        res.status(200).send(users)
+    },
+    deleteUser: (req, res, next)=> {
+        const {id} = req.params
+        //find the index of user with matching id
+        const index = users.findIndex(user => user.id === +id)
+        //splice out the object at that index
+        users.splice(index, 1)
         res.status(200).send(users)
     }
 }
